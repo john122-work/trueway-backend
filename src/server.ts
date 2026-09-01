@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './auth';
+import sportsbookRoutes from './sportsbook';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/sportsbook', sportsbookRoutes);
 
 // Health check endpoint
 app.get('/health', (req: Request, res: Response) => {
