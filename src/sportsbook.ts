@@ -4,12 +4,13 @@ import { WalletEngine } from './walletEngine';
 
 const router = Router();
 
-// Get all active sports matches with odds
+// Get all sports matches (case-insensitive status handling)
 router.get('/matches', async (req: Request, res: Response) => {
   try {
     const result = await pool.query(
-      'SELECT * FROM matches WHERE status = $1 ORDER BY start_time ASC',
-      ['UPCOMING']
+      `SELECT * FROM matches 
+       WHERE LOWER(status::text) = 'upcoming' 
+       ORDER BY start_time ASC`
     );
     res.json(result.rows);
   } catch (error) {
